@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: potato-facts
-  namespace: borealis
+  namespace: borealis-dev
   annotations: 
     "app": "potato-facts"
     "prometheus.io/scrape": "true"
