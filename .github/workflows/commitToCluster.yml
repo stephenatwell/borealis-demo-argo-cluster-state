@@ -1,12 +1,12 @@
-name: deployToCluster
+name: commitToCluster
 
 on:
   repository_dispatch:
-    types: deployToCluster
+    types: commitToCluster
 
 jobs:
   test:
-    name: deployToCluster
+    name: commitToCluster
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
