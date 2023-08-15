@@ -3,7 +3,7 @@ name: commitToCluster
 on:
   repository_dispatch:
     types: commitToCluster
-
+permissions: write-all
 jobs:
   test:
     name: commitToCluster
