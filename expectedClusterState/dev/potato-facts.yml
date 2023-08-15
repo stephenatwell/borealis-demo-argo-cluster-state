@@ -74,8 +74,6 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: potato-facts
-  labels:
-    app.kubernetes.io/instance: potato-facts-dev
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
