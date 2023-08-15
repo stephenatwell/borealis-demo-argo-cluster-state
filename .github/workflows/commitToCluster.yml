@@ -5,7 +5,14 @@ on:
     types: commitToCluster
 permissions: write-all
 jobs:
+  consecutiveness:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: mktcode/consecutive-workflow-action@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
   test:
+    needs: [consecutiveness ]
     name: commitToCluster
     runs-on: ubuntu-latest
     steps:
