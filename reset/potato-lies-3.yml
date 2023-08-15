@@ -7,13 +7,13 @@ metadata:
     "app": "potato-lies"
     "prometheus.io/scrape": "true"
 spec:
-  revisionHistoryLimit: 1
+  revisionHistoryLimit: 10
   replicas: 4
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 2
-      maxUnavailable: 1
+      maxSurge: 25%
+      maxUnavailable: 25%
   selector:
     matchLabels:
       app: potato-lies
