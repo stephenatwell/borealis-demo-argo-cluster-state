@@ -2,10 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: potato-lies
-  namespace: borealis
   annotations:
     "app": "potato-lies"
     "prometheus.io/scrape": "true"
+  labels:
+    app: "potato-lies"
 spec:
   revisionHistoryLimit: 1
   replicas: 4
@@ -28,7 +29,7 @@ spec:
     spec:
       containers:
         #      - image:  armory/potato-lies:v1.6.0 #v1.5.1 #v1.6.0 # v1.7.0
-        - image:  index.docker.io/armory/potatofacts:v1.5.1 #demoimages/bluegreen:v5 #v5, v4, v3
+        - image:  index.docker.io/armory/potatofacts:v2 #demoimages/bluegreen:v3 #v5, v4, v3
           imagePullPolicy: Always
           name: potato-lies
           resources:
@@ -42,13 +43,26 @@ spec:
             - name: NEW_RELIC_AGENT_ENBALED
               value: 'false'
             - name: APPLICATION_NAME
-              value: potatofacts
+              value: potatolies
             - name: APPLICATION_ENVIRONMENT
               value: prod
             - name: APPLICATION_VERSION
-              value: "v1.5.0"
-          #ports:
-          #  - containerPort: 8086
+              value: "v1.5.1"
+          ports:
+            - name: http
+              containerPort: 9001
+            - name: metrics
+              containerPort: 3001
+          readinessProbe:
+            httpGet:
+              path: /health/readiness
+              port: 9001
+              scheme: HTTP
+          livenessProbe:
+            httpGet:
+              path: /health/liveness
+              port: 9001
+              scheme: HTTP
       restartPolicy: Always
 
 
